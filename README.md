@@ -1,4 +1,4 @@
-# Lesson 3 - Web API and JSON
+# Lesson 4 - Web API and JSON
 
 In this lesson, we'll begin looking at Web APIs and how to use them. Almost all modern websites use web APIs to send data to your browser.
 
@@ -126,13 +126,13 @@ The API documentation for VaccineFinder is not comprehensive. There are paramete
 
 Add this to a new Jupyter notebook:
 
-```
+```python
 import ipywidgets as w
 import requests
 
 zipcode_input = w.Text(
-    value='11221',
-    placeholder='11221',
+    value='',
+    placeholder='',
     description='Zipcode:',
     disabled=False
 )
@@ -143,12 +143,14 @@ def get_data_from_api(zipcode):
     else:
         response = 0 # TODO: Get the provider data for the given zipcode, and print the JSON
 
-        print response
-)
+        print(response)
+
 w.interactive_output(get_data_from_api, { 'zipcode': zipcode_input })
 ```
 
-Then render the text input:
+You should see "not valid" show up.
+
+Then render the text input, by running this in a new block:
 
 ```python
 zipcode_input
