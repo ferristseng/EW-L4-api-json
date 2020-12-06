@@ -1,8 +1,8 @@
 # Lesson 3 - Web API and JSON
 
-In this lesson, we'll be looking at Web APIs and how to use them. Almost all modern websites use web APIs to send data to your browser.
+In this lesson, we'll begin looking at Web APIs and how to use them. Almost all modern websites use web APIs to send data to your browser.
 
-Most (not all) APIs return data in a structured format called JSON, which is designed to be readable both for humans and for computers.
+We'll also take a look at a data format called "JSON". Most (not all) APIs return data in a structured format called JSON, which is designed to be readable both for humans and for computers.
 
 ### 0. Client-Server Architecture
 
@@ -16,7 +16,7 @@ Servers are typically things we as consumers don't see. A server could be a comp
 
 In client-server architecture, the client "asks" the server for data. It does this by giving the server a path to the resource it wants. What does this remind you of?
 
-When someone goes to `google.com`, our browser (the client) is asking a Google server for all the HTML, CSS, Javascript, etc. that our web browser needs to render the Google website.
+When someone goes to `google.com`, our browser (the client) is asking a Google server for all the HTML, CSS, Javascript, etc. that our it needs to render the Google website.
 
 When a client asks for data from a server, we call that the `request`.
 
@@ -26,7 +26,7 @@ What do you think are advantages of client-server architecture?
 
 ### 1. What are Web APIs?
 
-Web APIs are ways of requesting data from a server. Most modern web applications use web APIs to send data from the "backend" (server) to the "frontend" (client).
+Web APIs are special interfaces that make it easy for applications to request data from a server. Most modern web applications use web APIs to send data from the "backend" (server) to the "frontend" (client).
 
 Let's explore https://vaccinefinder.org/, and see if we can find out whether or not it's using a Web API.
 
@@ -43,18 +43,18 @@ Let's try making a request to fetch some data from the Vaccine finder Web API!
 ```
 import requests
 
-req = requests.get('...')
+res = requests.get('...')
 
-req.text
+res.text
 ```
 
 ### 3. What is JSON?
 
 Most Web APIs will return data in a format called JSON (another data format that is common is CSV).
 
-JSON data is just text that is structured in a special way (kind of like a code file).
+JSON data is just plain text that is structured in a special way, and is designed to be human-readable.
 
-JSON looks like very similar to a Python dictionary. It is composed of an "Object" and "key-value" pairs.
+JSON looks very similar to a Python dictionary. It is composed of an "Object" and "key-value" pairs.
 
 This is a very simple JSON "Object":
 
@@ -64,7 +64,7 @@ This is a very simple JSON "Object":
 }
 ```
 
-Keys must *always* be strings (surrounded by quotes).
+Keys must *always* be strings.
 
 Values can be Strings, numbers, lists, or nested objects. Here's an example of each:
 
@@ -82,4 +82,18 @@ Values can be Strings, numbers, lists, or nested objects. Here's an example of e
 }
 ```
 
-*Note: JSON objects don't care about indentations or spaces. In order to save bandwidth and keep costs low, most Web APIs will remove all the extra spacing and indentation!*
+*Note: JSON objects don't care about indentations or spaces. In order to save bandwidth and keep costs low, most Web APIs will omit all the extra spacing and indentation!*
+
+### 4. Parsing JSON data in Python.
+
+Once we receive a JSON response from the web server, we need to parse it to make it actually useful.
+
+Python provides some [utilities to parse a JSON string](https://docs.python.org/3/library/json.html):
+
+```
+import json
+
+data = json.loads(???)
+```
+
+### 5. Asking for Specific Data from a Web API
