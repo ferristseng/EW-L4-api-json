@@ -97,3 +97,63 @@ data = json.loads(???)
 ```
 
 ### 5. Asking for Specific Data from a Web API
+
+There are a couple of different ways we can tell a Web API what data we want (in the request).
+
+First, we have to look at how a URL is constructed:
+
+![URL Parts](images/url.png)
+
+Web API's typically allow you to request specific pieces of data in the:
+
+  1. URL *Path*
+  2. URL *Parameters* (or *query string*). These are Key/Value pairs that are formatted in a special way.
+  3. Request Body (we won't cover this today)
+
+*Note: How you actually request data varies from API to API. You'll have to consult the API documentation on a case-by-case basis to learn which data you can access frmo an API.*
+
+Let's look at the API documentation for VaccineFinder: https://api.findertools.org/api/swagger/
+
+  1. Find the documentation for this *endpoint*: `/public/providers/{zipcode}`.
+  2. Make a URL to request provider data for your zipcode, and try it out! (Pay attention to the `Base URL` listed at the top of the documentation page)
+  3. Try adding a parameter called `format`, and setting the value to `json`. What do you notice?
+
+### 6. Looking at the locations endpoint for VaccineFinder
+
+The API documentation for VaccineFinder is not comprehensive. There are parameters that the API accepts that are not listed! Let's take a look at the request that VaccineFinder is making when you search for a location, and reverse engineering it!
+
+### 7. Short Exercise (or Homework)
+
+Add this to a new Jupyter notebook:
+
+```
+import ipywidgets as w
+import requests
+
+zipcode_input = w.Text(
+    value='11221',
+    placeholder='11221',
+    description='Zipcode:',
+    disabled=False
+)
+
+def get_data_from_api(zipcode):
+    if (len(zipcode) < 5):
+        print('not valid')
+    else:
+        response = 0 # TODO: Get the provider data for the given zipcode, and print the JSON
+
+        print response
+)
+w.interactive_output(get_data_from_api, { 'zipcode': zipcode_input })
+```
+
+Then render the text input:
+
+```python
+zipcode_input
+```
+
+Walk through the code, and try to understand what it's doing. Fill in the code for the `TODO`, and make the application get provider data from the VaccineFinder web API.
+
+*Hint: Use the `/public/providers/{zipcode}` endpoint from earlier!*
